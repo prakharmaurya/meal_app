@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/meal.dart';
+import '../screens/meal_detail_screen.dart';
 
 class MealItem extends StatelessWidget {
   final String title;
@@ -7,9 +8,11 @@ class MealItem extends StatelessWidget {
   final int duration;
   final Complexity complexity;
   final Affordability affordability;
+  final String id;
 
   MealItem(
-      {@required this.title,
+      {@required this.id,
+      @required this.title,
       @required this.imageUrl,
       @required this.duration,
       @required this.complexity,
@@ -31,10 +34,33 @@ class MealItem extends StatelessWidget {
     }
   }
 
+  String get affordabilityText {
+    switch (affordability) {
+      case Affordability.Affordable:
+        return "Affordable";
+        break;
+      case Affordability.Pricey:
+        return "Priecy";
+        break;
+      case Affordability.Luxurious:
+        return "Luxurious";
+        break;
+      default:
+        return "Unknown";
+    }
+  }
+
+  void selectMeal(BuildContext context) {
+    Navigator.of(context).pushNamed(
+      MealDetailScreen.routeName,
+      arguments: id,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () => selectMeal(context),
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
@@ -80,6 +106,7 @@ class MealItem extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(15),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Row(
                     children: [
@@ -88,12 +115,18 @@ class MealItem extends StatelessWidget {
                       Text('${duration}min'),
                     ],
                   ),
-                  SizedBox(width: 10),
                   Row(
                     children: [
                       Icon(Icons.work),
                       SizedBox(width: 6),
                       Text(complexityText),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Icon(Icons.attach_money),
+                      SizedBox(width: 6),
+                      Text(affordabilityText),
                     ],
                   ),
                 ],

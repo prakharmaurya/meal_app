@@ -26,9 +26,10 @@ class CategoryItem extends StatelessWidget {
         child: Text(this.title, style: Theme.of(context).textTheme.headline6),
         decoration: BoxDecoration(
           gradient: LinearGradient(
-              colors: [color.withOpacity(.7), color],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight),
+            colors: [color.withOpacity(.7), color],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
           borderRadius: BorderRadius.circular(15),
         ),
       ),
