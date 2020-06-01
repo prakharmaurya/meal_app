@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import '../screens/filters_screen.dart';
 
 class MainDrawer extends StatelessWidget {
-  Widget buildListTile({IconData icon, String title}) {
+  Widget buildListTile({IconData icon, String title, Function trigger}) {
     return ListTile(
       leading: Icon(
         icon,
@@ -15,7 +16,7 @@ class MainDrawer extends StatelessWidget {
           fontWeight: FontWeight.bold,
         ),
       ),
-      onTap: () {},
+      onTap: trigger,
     );
   }
 
@@ -25,22 +26,34 @@ class MainDrawer extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            height: 80,
+            height: 100,
             width: double.infinity,
-            padding: EdgeInsets.fromLTRB(20, 40, 20, 0),
+            padding: EdgeInsets.fromLTRB(20, 40, 20, 10),
             alignment: Alignment.centerLeft,
+            color: Theme.of(context).accentColor,
             child: Text(
-              'Favourite',
+              'Cooking Up!!',
               style: TextStyle(
                 fontWeight: FontWeight.w900,
                 fontSize: 30,
-                color: Theme.of(context).accentColor,
+                color: Theme.of(context).primaryColor,
               ),
             ),
           ),
-          Divider(),
-          buildListTile(icon: Icons.restaurant, title: 'Melas'),
-          buildListTile(icon: Icons.settings, title: 'Settings'),
+          buildListTile(
+            icon: Icons.restaurant,
+            title: 'Melas',
+            trigger: () {
+              Navigator.of(context).pushNamed('/');
+            },
+          ),
+          buildListTile(
+            icon: Icons.settings,
+            title: 'Filters',
+            trigger: () {
+              Navigator.of(context).pushNamed(FiltersScreen.routeName);
+            },
+          ),
         ],
       ),
     );
