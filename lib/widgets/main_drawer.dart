@@ -44,14 +44,15 @@ class MainDrawer extends StatelessWidget {
             icon: Icons.restaurant,
             title: 'Melas',
             trigger: () {
-              Navigator.of(context).pushNamed('/');
+              Navigator.of(context).pushReplacementNamed('/');
             },
           ),
           buildListTile(
             icon: Icons.settings,
             title: 'Filters',
             trigger: () {
-              Navigator.of(context).pushNamed(FiltersScreen.routeName);
+              Navigator.of(context)
+                  .pushReplacementNamed(FiltersScreen.routeName);
             },
           ),
         ],
