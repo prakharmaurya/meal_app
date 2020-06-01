@@ -35,6 +35,7 @@
 /.idea/
 /ios/
 /web/
+/.vscode/
 
 # Web related
 lib/generated_plugin_registrant.dart
